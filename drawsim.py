@@ -4,7 +4,6 @@ import sys
 import time
 from math import floor
 from random import seed, shuffle
-# Regex /^([0-9]+) (.*)$/
 
 def printHelp():
     print("Usage: "+sys.argv[0]+" <deck file> <draw amount>\n"+
@@ -24,13 +23,12 @@ def prepareDeck(deck):
         cardname = tmp[1]
         for i in range(cardcount):
             deck.append(cardname)
+    cardlist.close()
 
 def cutDeck(deck):
     upperHalf = deck[0:floor(len(deck)/2)]
     lowerHalf = deck[floor(len(deck)/2):len(deck)-floor(len(deck)/2)]
     deck = lowerHalf + upperHalf
-
-
 
 def main():
     if len(sys.argv) == 1:
@@ -45,7 +43,6 @@ def main():
            exit()
     else:
         drawcount = 7
-
        
     deck = []
     prepareDeck(deck)
@@ -53,9 +50,11 @@ def main():
     seed(((t & 0xff000000) >> 24) + ((t & 0x00ff0000) >>  8) + ((t & 0x0000ff00) <<  8) + ((t & 0x000000ff) << 24))
     shuffle(deck)
     deck.reverse()
+    t = int( time.time() * 1000.0 )
     seed(((t & 0xff000000) >> 24) + ((t & 0x00ff0000) >>  8) + ((t & 0x0000ff00) <<  8) + ((t & 0x000000ff) << 24))
     shuffle(deck)
     deck.reverse()
+    t = int( time.time() * 1000.0 )
     seed(((t & 0xff000000) >> 24) + ((t & 0x00ff0000) >>  8) + ((t & 0x0000ff00) <<  8) + ((t & 0x000000ff) << 24))
     shuffle(deck)
     cutDeck(deck)
